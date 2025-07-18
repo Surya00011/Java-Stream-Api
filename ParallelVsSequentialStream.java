@@ -19,10 +19,18 @@ public class ParallelVsSequentialStream {
 		.map(s -> "Hello " + s.name() + ", you are a " + s.major() + " major")
 		.map(String::toUpperCase)
 		.forEach(System.err::println);  
-
+               
 		long parallelMs = (System.nanoTime() - t1) / 1_000_000;
 		System.out.printf("Parallel took  %db/ms%n", parallelMs);
 
+	        long t2 = System.nanoTime();
+		students.stream().parallel()
+		.map(s -> "Hello " + s.name() + ", you are a " + s.major() + " major")
+		.map(String::toUpperCase)
+		.forEachOrdered(System.err::println);
+
+		long parallelMsOrdered = (System.nanoTime() - t2) / 1_000_000;
+		System.out.printf("Parallel Ordered took  %db/ms%n", parallelMsOrdered);
 	}
 
 	// Student record (Java 16+). If using older version, use a regular class with fields and getters
