@@ -1,12 +1,12 @@
 import java.util.List;
 
-public class ParallelVsSequntialStream{
+public class ParallelVsSequentialStream {
 
 	public static void main(String[] args) {
 		List<Student> students = getSampleStudents();
 		long t0 = System.nanoTime();
 		students.stream()
-		.map(s -> "Hello " + s.name() + ", you are a " + s.major())
+		.map(s -> "Hello " + s.name() + ", you are a " + s.major() + " major" )
 		.map(String::toUpperCase)
 		.forEach(System.err::println);
 
@@ -16,7 +16,7 @@ public class ParallelVsSequntialStream{
 		long t1 = System.nanoTime();
 
 		students.stream().parallel()        
-		.map(s -> "Hello " + s.name() + ", you are a " + s.major())
+		.map(s -> "Hello " + s.name() + ", you are a " + s.major() + " major")
 		.map(String::toUpperCase)
 		.forEach(System.err::println);  
 
